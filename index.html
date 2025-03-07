@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Hardy-Weinberg Principle</title>
+    <link rel="stylesheet" href="hardy-weinberg.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+	<style type="text/css">
+.auto-style1 {
+	text-align: center;
+	font-weight: bold;
+}
+.auto-style2 {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+    <header class="auto-style1">
+        Hardy-Weinberg Principle
+    </header>
+
+    <div class="container">
+	<canvas id="alleleChart"></canvas>
+
+        <h2>Introduction</h2>
+        <p>The <span class="key-term">Hardy-Weinberg Principle</span> states that in a 
+		<strong><em>non-evolving</em></strong> population, allele frequencies remain constant from generation to generation.</p>
+		<p>The Hardy-Weinberg equilibrium is a principle stating that the 
+		genetic variation in a population will remain constant from one 
+		generation to the next in the absence of disturbing factors. When mating 
+		is random in a large population with no disruptive circumstances, the 
+		law predicts that both genotype and allele frequencies will remain 
+		constant because they are in equilibrium. </p>
+		<p>The Hardy-Weinberg equilibrium can be disturbed by a number of 
+		forces, including mutations, natural selection, nonrandom mating, 
+		genetic drift, and gene flow. For instance, mutations disrupt the 
+		equilibrium of allele frequencies by introducing new alleles into a 
+		population. Similarly, natural selection and nonrandom mating disrupt 
+		the Hardy-Weinberg equilibrium because they result in changes in gene 
+		frequencies. This occurs because certain alleles help or harm the 
+		reproductive success of the organisms that carry them. </p>
+		<p>Another factor 
+		that can upset this equilibrium is genetic drift, which occurs when 
+		allele frequencies grow higher or lower by chance and typically takes 
+		place in small populations. Gene flow, which occurs when breeding 
+		between two populations transfers new alleles into a population, can 
+		also alter the Hardy-Weinberg equilibrium. Because all of these disruptive forces commonly occur in nature, the 
+		Hardy-Weinberg equilibrium rarely applies in reality. Therefore, the 
+		Hardy-Weinberg equilibrium describes an idealized state, and genetic 
+		variations in nature can be measured as changes from this equilibrium 
+		state.</p>
+		<p align="center"></p>
+		<p>&nbsp;</p>
+
+        <h2>Equation</h2>
+        <div class="equation">
+            p² + 2pq + q² = 1
+        </div>
+
+        <h2>Interactive Calculator</h2>
+        <div class="calculator">
+            <p>Enter the percentage of individuals with the recessive trait (q²):</p>
+            <input type="number" id="q2" placeholder="e.g., 9">
+            <button onclick="calculateHW()">Calculate</button>
+            <p id="result"></p>
+        </div>
+
+        <h2>Multiple Choice Quiz</h2>
+        <div class="quiz-container" id="quiz">
+            <p class="quiz-question">1. What does "p" represent in the Hardy-Weinberg equation?</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'correct')">Dominant allele frequency</li>
+                <li onclick="checkAnswer(this, 'wrong')">Recessive allele frequency</li>
+                <li onclick="checkAnswer(this, 'wrong')">Genotype frequency</li>
+            </ul>
+
+            <p class="quiz-question">2. Which of the following is NOT a condition for Hardy-Weinberg equilibrium?</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'wrong')">Large population</li>
+                <li onclick="checkAnswer(this, 'correct')">Natural selection</li>
+                <li onclick="checkAnswer(this, 'wrong')">Random mating</li>
+            </ul>
+
+            <p class="quiz-question">3. What does "q²" represent?</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'wrong')">Dominant allele frequency</li>
+                <li onclick="checkAnswer(this, 'correct')">Homozygous recessive individuals</li>
+                <li onclick="checkAnswer(this, 'wrong')">Heterozygous individuals</li>
+            </ul>
+
+            <p class="quiz-question">4. What does "2pq" represent in the equation?</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'wrong')">Homozygous dominant individuals</li>
+                <li onclick="checkAnswer(this, 'correct')">Heterozygous individuals</li>
+                <li onclick="checkAnswer(this, 'wrong')">Recessive allele frequency</li>
+            </ul>
+
+            <p class="quiz-question">5. If q² = 0.25, what is the value of q?</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'wrong')">0.5</li>
+                <li onclick="checkAnswer(this, 'correct')">0.5</li>
+                <li onclick="checkAnswer(this, 'wrong')">0.25</li>
+            </ul>
+
+            <p class="quiz-question">6. A population is evolving if:</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'correct')">Allele frequencies change over time</li>
+                <li onclick="checkAnswer(this, 'wrong')">Allele frequencies remain constant</li>
+                <li onclick="checkAnswer(this, 'wrong')">Recessive alleles disappear</li>
+            </ul>
+
+            <p class="quiz-question">7. Which of the following disrupts Hardy-Weinberg equilibrium?</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'wrong')">No mutations</li>
+                <li onclick="checkAnswer(this, 'correct')">Gene flow</li>
+                <li onclick="checkAnswer(this, 'wrong')">Random mating</li>
+            </ul>
+
+            <p class="quiz-question">8. What is the significance of Hardy-Weinberg equilibrium?</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'correct')">It serves as a null hypothesis to detect evolution</li>
+                <li onclick="checkAnswer(this, 'wrong')">It shows how dominant traits always increase</li>
+                <li onclick="checkAnswer(this, 'wrong')">It predicts mutations in populations</li>
+            </ul>
+
+            <p class="quiz-question">9. Which condition ensures random mating?</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'wrong')">Artificial selection</li>
+                <li onclick="checkAnswer(this, 'wrong')">Small population</li>
+                <li onclick="checkAnswer(this, 'correct')">No mate preference</li>
+            </ul>
+
+            <p class="quiz-question">10. In a population where p = 0.7, what is q?</p>
+            <ul class="quiz-options">
+                <li onclick="checkAnswer(this, 'wrong')">0.9</li>
+                <li onclick="checkAnswer(this, 'wrong')">0.5</li>
+                <li onclick="checkAnswer(this, 'correct')">0.3</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="auto-style2">
+        <strong>&copy; 2025 Myers Interactive Learning
+    </strong>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
